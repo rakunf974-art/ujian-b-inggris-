@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ujian Bahasa Inggris</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#eef3f4;--c:#fff;--t:#10262b;--m:#5b7176;--p:#0f766e;--r:#c62828;--b:#cfdcde}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1a1d;--c:#12272b;--t:#e8f3f4;--m:#8fa9ad;--p:#2dd4bf;--r:#ff7b7b;--b:#25434a}}
+:root[data-theme="dark"]{--bg:#0b1a1d;--c:#12272b;--t:#e8f3f4;--m:#8fa9ad;--p:#2dd4bf;--r:#ff7b7b;--b:#25434a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--t);font:17px/1.55 Georgia,"Times New Roman",serif}
+.w{max-width:640px;margin:auto;padding:16px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:10px;padding:16px;margin-bottom:12px}
+h1{font-size:26px;margin:0 0 6px}p{margin:6px 0;color:var(--m)}
+input{width:100%;padding:12px;margin:6px 0;border:1px solid var(--b);border-radius:8px;background:var(--bg);color:var(--t);font:inherit;box-sizing:border-box}
+button{padding:12px 16px;border:0;border-radius:8px;background:var(--p);color:var(--bg);font:600 16px system-ui,sans-serif;cursor:pointer}
+button.o{display:block;width:100%;text-align:left;background:var(--bg);color:var(--t);border:1px solid var(--b);margin:8px 0;font:inherit}
+button.o.s{border-color:var(--p);box-shadow:inset 4px 0 0 var(--p);font-weight:700}
+button.g{background:transparent;color:var(--t);border:1px solid var(--b)}
+.bar{display:flex;justify-content:space-between;align-items:center;font:600 15px system-ui,sans-serif}
+#tm{color:var(--p)}#tm.l{color:var(--r)}
+#g{display:flex;flex-wrap:wrap;gap:4px}
+#g button{padding:6px 0;width:34px;font:13px system-ui,sans-serif;background:transparent;color:var(--t);border:1px solid var(--b)}
+#g button.d{background:var(--p);color:var(--bg);border-color:var(--p)}
+#g button.c{outline:2px solid var(--t)}
+.row{display:flex;gap:8px;margin-top:10px}.row button{flex:1}
+#ov{position:fixed;inset:0;background:rgba(10,0,0,.92);display:none;align-items:center;justify-content:center;text-align:center;color:#fff;padding:24px;z-index:9}
+#ov h2{color:#ff7b7b;margin:0 0 8px}
+.big{font-size:64px;font-weight:700;color:var(--p);line-height:1}
+.hide{display:none}
+</style></head><body>
+<div class="w">
+<div id="A" class="card">
+<h1>Ujian Bahasa Inggris</h1>
+<p>50 soal pilihan ganda, waktu 60 menit. Jangan pindah tab atau keluar dari halaman: alarm akan berbunyi, dan 3 kali keluar membuat ujian dikumpulkan otomatis.</p>
+<input id="n" placeholder="Nama lengkap" autocomplete="off">
+<input id="k" placeholder="Kelas" autocomplete="off">
+<button onclick="mulai()" style="width:100%;margin-top:8px">Mulai ujian</button>
+</div>
+
+<div id="B" class="hide">
+<div class="card bar"><span id="no"></span><span id="vw"></span><span id="tm">60:00</span></div>
+<div class="card"><div id="q" style="font-size:19px;font-weight:600"></div><div id="op"></div>
+<div class="row"><button class="g" onclick="go(-1)">Sebelumnya</button><button onclick="go(1)">Berikutnya</button></div></div>
+<div class="card"><div id="g"></div><button onclick="kumpul()" style="width:100%;margin-top:12px">Kumpulkan jawaban</button></div>
+</div>
+
+<div id="C" class="card hide" style="text-align:center">
+<p>Nilai kamu</p><div class="big" id="sk"></div>
+<p id="dt"></p>
+<p>Hasil dikirim ke WhatsApp guru. Jika WhatsApp tidak terbuka sendiri, tekan tombol di bawah lalu tekan kirim.</p>
+<a id="wa" target="_blank" rel="noopener"><button style="width:100%">Kirim nilai ke WhatsApp</button></a>
+</div>
+</div>
+
+<div id="ov"><div><h2>Kamu keluar dari halaman ujian!</h2><p id="vn" style="color:#fff"></p><button onclick="document.getElementById('ov').style.display='none'">Lanjutkan ujian</button></div></div>
+
+<script>
+// GANTI nomor WhatsApp guru (format internasional, tanpa + atau 0 di depan)
+const WA="6285819351154", DUR=3600, MAXV=3;
+const Q=`She ___ to school every day.|goes|go|going|gone|0
+They ___ playing football now.|is|are|am|be|1
+I ___ my homework last night.|do|did|done|doing|1
+What is the opposite of "big"?|small|tall|wide|long|0
+He is ___ than his brother.|tall|taller|tallest|more tall|1
+We ___ lunch when he called.|had|were having|have|are having|1
+There ___ many students in the class.|is|are|was|be|1
+She has lived here ___ 2010.|for|since|from|during|1
+If it rains, we ___ at home.|stay|will stay|stayed|would stay|1
+The book ___ by the teacher.|wrote|is written|writes|writing|1
+Which word is closest in meaning to "happy"?|sad|glad|angry|tired|1
+I look forward to ___ you.|see|seeing|saw|seen|1
+He asked me where I ___.|live|lived|living|lives|1
+This is ___ movie I have ever seen.|good|better|best|the best|3
+She is interested ___ music.|on|at|in|with|2
+Neither John nor Mary ___ here.|is|are|were|be|0
+I wish I ___ a bird.|am|was|were|be|2
+The man ___ lives next door is a doctor.|which|who|whose|whom|1
+"Ancient" means ___.|very old|new|modern|small|0
+She is good ___ English.|in|at|on|for|1
+By next year, I ___ graduated.|will|will have|have|had|1
+He didn't come ___ he was sick.|because|so|but|although|0
+___ you help me, please?|Can|Does|Are|Is|0
+What is the plural of "child"?|childs|childes|children|childrens|2
+I have ___ umbrella.|a|an|the|some|1
+What is the opposite of "generous"?|kind|stingy|rich|polite|1
+She suggested ___ to the park.|go|going|to go|went|1
+The meeting was cancelled ___ the rain.|because|because of|although|so|1
+He ___ be at home; his lights are on.|must|can't|shouldn't|needn't|0
+I have never ___ sushi.|eat|ate|eaten|eating|2
+How ___ water do you need?|many|much|few|lot|1
+She told me that she ___ tired.|is|was|be|being|1
+Which word is closest in meaning to "begin"?|start|finish|stop|end|0
+The children ___ in the garden when it started to rain.|play|were playing|are playing|plays|1
+Not only he ___ also his sister came.|but|and|or|so|0
+I'd rather ___ at home.|stay|to stay|staying|stayed|0
+"Enormous" means ___.|tiny|huge|weak|quiet|1
+___ he was tired, he kept working.|Because|Although|So|Since|1
+Tom, ___ father is a pilot, is my friend.|who|whose|which|whom|1
+She ___ for two hours when I arrived.|has waited|had been waiting|waits|is waiting|1
+The cake ___ delicious.|smells|smell|smelling|is smell|0
+I congratulate you ___ your success.|for|on|at|with|1
+Which sentence is correct?|He don't like fish.|He doesn't likes fish.|He doesn't like fish.|He not like fish.|2
+What is the opposite of "arrive"?|depart|come|reach|enter|0
+By the time we got there, the film ___.|already started|had already started|has started|starts|1
+She speaks English very ___.|good|well|best|better|1
+___ of the students passed the exam.|All|Every|Each one|Much|0
+I am used to ___ early.|get up|getting up|got up|gets up|1
+"Break a leg!" means ___.|good luck|be careful|run away|get hurt|0
+Had I known, I ___ you.|would help|would have helped|will help|helped|1`.split("\n").map(l=>{const p=l.split("|");return{q:p[0],o:p.slice(1,5),a:+p[5]}});
+
+const $=id=>document.getElementById(id);
+let ans={},i=0,v=0,away=false,started=false,done=false,ctx,osc,left=DUR,tm,nm,kl;
+
+function mulai(){
+  nm=$("n").value.trim();kl=$("k").value.trim();
+  if(!nm){alert("Isi nama lengkap dulu.");return}
+  try{ctx=new(window.AudioContext||window.webkitAudioContext)();ctx.resume()}catch(e){}
+  Q.sort(()=>Math.random()-.5);
+  $("A").className="hide";$("B").className="";
+  const g=$("g");Q.forEach((_,k)=>{const b=document.createElement("button");b.textContent=k+1;b.onclick=()=>{i=k;draw()};g.appendChild(b)});
+  started=true;draw();
+  tm=setInterval(()=>{left--;const m=Math.floor(left/60),s=left%60;$("tm").textContent=m+":"+String(s).padStart(2,"0");$("tm").className=left<300?"l":"";if(left<=0)selesai()},1000);
+  try{document.documentElement.requestFullscreen()}catch(e){}
+}
+function draw(){
+  const q=Q[i];$("no").textContent="Soal "+i+1-0+" / "+Q.length;$("no").textContent="Soal "+(i+1)+" / "+Q.length;
+  $("vw").textContent=v?"Pelanggaran "+v+"/"+MAXV:"";
+  $("q").textContent=q.q;$("op").innerHTML="";
+  q.o.forEach((x,j)=>{const b=document.createElement("button");b.className="o"+(ans[i]===j?" s":"");b.textContent="ABCD"[j]+".  "+x;b.onclick=()=>{ans[i]=j;draw()};$("op").appendChild(b)});
+  [...$("g").children].forEach((b,k)=>{b.className=(ans[k]!==undefined?"d ":"")+(k===i?"c":"")});
+}
+function go(d){i=Math.max(0,Math.min(Q.length-1,i+d));draw()}
+function kumpul(){
+  const kosong=Q.length-Object.keys(ans).length;
+  if(confirm(kosong?kosong+" soal belum dijawab. Kumpulkan sekarang?":"Kumpulkan jawaban sekarang?"))selesai();
+}
+function alarm(){
+  if(!ctx)return;try{ctx.resume();const t=ctx.currentTime;osc=ctx.createOscillator();const g=ctx.createGain();
+  osc.type="square";g.gain.value=.35;osc.connect(g);g.connect(ctx.destination);
+  for(let k=0;k<240;k++)osc.frequency.setValueAtTime(k%2?1000:700,t+k*.25);
+  osc.start();osc.stop(t+60)}catch(e){}
+}
+function stopAlarm(){try{osc&&osc.stop()}catch(e){}osc=null}
+function leave(){if(!started||done||away)return;away=true;v++;alarm()}
+function back(){
+  if(!away||done)return;away=false;stopAlarm();
+  if(v>=MAXV){selesai();return}
+  $("vn").textContent="Pelanggaran "+v+" dari "+MAXV+". Pada pelanggaran ke-"+MAXV+" ujian dikumpulkan otomatis.";
+  $("ov").style.display="flex";draw();
+}
+document.addEventListener("visibilitychange",()=>document.hidden?leave():back());
+addEventListener("blur",leave);addEventListener("focus",back);
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("copy",e=>e.preventDefault());
+
+function selesai(){
+  if(done)return;done=true;clearInterval(tm);stopAlarm();
+  $("ov").style.display="none";
+  let c=0;Q.forEach((q,k)=>{if(ans[k]===q.a)c++});
+  const s=Math.round(c/Q.length*100);
+  $("B").className="hide";$("C").className="card";
+  $("sk").textContent=s;$("dt").textContent=nm+(kl?" - "+kl:"")+" | Benar "+c+" dari "+Q.length;
+  const msg="*HASIL UJIAN BAHASA INGGRIS*\nNama: "+nm+"\nKelas: "+(kl||"-")+"\nBenar: "+c+" / "+Q.length+"\nNilai: "+s+"\nKeluar halaman: "+v+" kali\nWaktu: "+new Date().toLocaleString("id-ID");
+  const url="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+  $("wa").href=url;
+  try{window.open(url,"_blank")}catch(e){}
+  try{document.exitFullscreen&&document.fullscreenElement&&document.exitFullscreen()}catch(e){}
+}
+</script></body></html>
